@@ -2,6 +2,8 @@ import discord
 import os
 from discord.ext import commands
 from dotenv import load_dotenv
+import random
+import asyncio
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -30,5 +32,27 @@ async def on_ready():
 async def ping(interaction: discord.Interaction):
     latency = round(bot.latency * 1000)
     await interaction.response.send_message(f"🏓 Pong! Latência: `{latency}ms`")
+
+@bot.tree.command(name="coinflip", description="Joga uma moeda que pode cair cara ou coroa.")
+async def coinflip(interaction: discord.Interaction):
+    await interaction.response.defer()
+
+    msg_animation = [
+        "A moeda está no ar .",
+        "A moeda está no ar . .",
+        "A moeda está no ar . . ."
+    ]
+    
+    await interaction.edit_original_response(content=msg_animation[0])
+    
+    for i in range(1, len(msg_animation)):
+        await asyncio.sleep(0.7)
+        await interaction.edit_original_response(content=msg_animation[i])
+
+    result = random.choice(["Cara", "Coroa"])
+    await asyncio.sleep(0.5)
+    await interaction.edit_original_response(
+        content=f"🪙 A moeda caiu **`{result}`**!"
+    )
 
 bot.run(TOKEN)
