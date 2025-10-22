@@ -4,7 +4,7 @@ from discord.ext import commands
 from PIL import Image, ImageDraw, ImageFont
 import aiohttp
 import io
-import os
+# import os
 
 class Welcome(commands.Cog):
     def __init__(self, bot):
@@ -81,14 +81,6 @@ class Welcome(commands.Cog):
             content=f"🎉 Bem-vindo(a) ao servidor, {interaction.user.mention}!",
             file=discord.File(image_bytes, filename="welcome.png"),
         )
-        # if channel:
-        #     await channel.send(
-        #         f"🎉 Seja bem-vindo(a) ao servidor, {interaction.user.mention}! "
-        #         f"Fique à vontade e leia as regras."
-        #     )
-        #     await interaction.response.send_message("✅ Mensagem de boas-vindas enviada!", ephemeral=True)
-        # else:
-        #     await interaction.response.send_message("⚠️ Canal de boas-vindas não encontrado!", ephemeral=True)
 
             
 async def setup(bot):

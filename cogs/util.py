@@ -5,7 +5,7 @@ from discord.ext import commands
 class Util(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        
+    
     @app_commands.command(name="ping", description="Mostra a latência do bot.")
     async def ping(self, interaction: discord.Interaction):
         latency = round(self.bot.latency * 1000)
